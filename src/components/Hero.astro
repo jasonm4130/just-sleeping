@@ -55,3 +55,20 @@ import gary from "../photos/featured/gary.jpg";
   .poke-line { font-size: 14px; line-height: 1.5; margin-top: 10px; min-height: 48px; opacity: .85; }
   .poke-tally { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: .5; margin-top: 14px; }
 </style>
+
+<script>
+  import { pokeLineFor } from "../scripts/poke";
+
+  const card = document.getElementById("poke");
+  const line = document.getElementById("poke-line");
+  const count = document.getElementById("poke-count");
+  let pokes = Number(localStorage.getItem("tjs-pokes") ?? "0");
+  if (count) count.textContent = String(pokes);
+  if (line) line.textContent = pokeLineFor(pokes);
+  card?.addEventListener("click", () => {
+    pokes += 1;
+    localStorage.setItem("tjs-pokes", String(pokes));
+    if (count) count.textContent = String(pokes);
+    if (line) line.textContent = pokeLineFor(pokes);
+  });
+</script>

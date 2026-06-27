@@ -1,0 +1,35 @@
+<button id="night-toggle" type="button" aria-pressed="false">
+  <span class="moon"></span><span class="label">quiet hours?</span>
+</button>
+
+<div class="overlay" aria-hidden="true">
+  <span class="moon-big"></span><span class="shh">shhh…</span>
+</div>
+
+<script>
+  const html = document.documentElement;
+  const btn = document.getElementById("night-toggle");
+  const label = btn?.querySelector(".label");
+  const sync = () => {
+    const night = html.dataset.theme === "night";
+    if (label) label.textContent = night ? "shhh — quiet hours" : "quiet hours?";
+    btn?.setAttribute("aria-pressed", String(night));
+    document.querySelector(".overlay")?.classList.toggle("on", night);
+  };
+  sync();
+  btn?.addEventListener("click", () => {
+    html.dataset.theme = html.dataset.theme === "night" ? "day" : "night";
+    localStorage.setItem("tjs-theme", html.dataset.theme);
+    sync();
+  });
+</script>
+
+<style>
+  #night-toggle { position: fixed; bottom: 22px; right: 22px; z-index: 10; user-select: none; background: var(--color-card); padding: 9px 14px; box-shadow: 0 8px 22px -8px rgba(0,0,0,.7); transform: rotate(-2deg); display: flex; align-items: center; gap: 9px; border: 1.5px solid color-mix(in oklab, var(--color-ink) 25%, transparent); color: var(--color-ink); }
+  .moon { width: 18px; height: 18px; border-radius: 50%; background: var(--color-ink); box-shadow: inset -6px -2px 0 -1px var(--color-card); }
+  .label { font-family: var(--font-body); font-size: 12px; letter-spacing: 1px; }
+  .overlay { position: fixed; inset: 0; z-index: 5; pointer-events: none; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .5s ease; background: rgba(12,14,26,.6); }
+  .overlay.on { opacity: 1; }
+  .overlay .moon-big { position: fixed; top: 42px; right: 54px; width: 64px; height: 64px; border-radius: 50%; background: #f0ecd9; box-shadow: 0 0 50px 14px rgba(240,236,217,.35), inset -16px -8px 0 -4px rgba(0,0,0,.14); }
+  .shh { font-family: var(--font-hand); font-weight: 700; font-size: clamp(70px, 20vw, 200px); color: rgba(240,236,217,.12); transform: rotate(-6deg); }
+</style>
