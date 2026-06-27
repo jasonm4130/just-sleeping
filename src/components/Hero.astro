@@ -17,7 +17,7 @@ import gary from "../photos/featured/gary.jpg";
   <div class="gary-row">
     <figure class="gary" id="poke">
       <div class="frame">
-        <Picture src={gary} formats={["avif", "webp"]} quality={55} widths={[300, 600]} sizes="300px" loading="eager" fetchpriority="high" alt="a crab, resting" />
+        <Picture src={gary} formats={["avif", "webp"]} quality={40} widths={[300, 600]} sizes="300px" loading="eager" fetchpriority="high" alt="a crab, resting" />
       </div>
       <figcaption>this is Gary. he's fine.<br /><span>resting his eyes. and his everything.</span></figcaption>
       <span class="z z1">z</span><span class="z z2">Z</span><span class="z z3">z</span>
@@ -47,7 +47,8 @@ import gary from "../photos/featured/gary.jpg";
   .gary-row { display: flex; gap: 30px; align-items: flex-end; flex-wrap: wrap; margin-top: 38px; }
   .gary { position: relative; width: 300px; max-width: 78vw; margin: 0; cursor: pointer; user-select: none; background: var(--color-card-inner); padding: 12px 12px 14px; box-shadow: 0 10px 26px -12px rgba(0,0,0,.5); transform: rotate(1.4deg); animation: tjsBreathe 5.5s ease-in-out infinite; }
   .gary:hover { animation: tjsWob .5s ease-in-out; }
-  .frame img { width: 100%; height: auto; filter: grayscale(1) contrast(1.5) brightness(1.07); }
+  /* aspect-ratio reserves the box before the LCP image loads — prevents CLS on slow/cold loads */
+  .frame img { width: 100%; height: auto; aspect-ratio: 16 / 9; filter: grayscale(1) contrast(1.5) brightness(1.07); }
   figcaption { font-family: var(--font-hand); font-weight: 700; font-size: 23px; line-height: 1.05; margin-top: 8px; }
   figcaption span { font-size: 18px; font-weight: 500; opacity: .8; }
   .z { position: absolute; top: -8px; font-family: var(--font-display); color: var(--color-ink); opacity: 0; animation: tjsDrift 4.2s ease-in infinite; }
