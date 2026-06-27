@@ -1,16 +1,17 @@
-/* Self-hosted latin subsets — replaces the render-blocking Google Fonts <link>.
-   Files live in public/fonts/ and are served from /fonts/ (unhashed, stable URLs).
-   unicode-range mirrors Google's "latin" subset so out-of-range glyphs (∞, arrows)
-   fall back to system fonts exactly as before. */
+/* Self-hosted fonts, subset to the glyphs this English zine actually renders
+   (ASCII + the punctuation used: · — ' ' " " …). All OpenType features kept, so
+   rendering is identical — only never-used glyphs were dropped (~30KB lighter,
+   less competition with the LCP image). Re-subset if content gains new glyphs:
+   see pyftsubset --unicodes in the commit that introduced this. Out-of-range
+   glyphs (∞, arrows, ⚠) fall back to system fonts, exactly as before. */
 @font-face {
   font-family: "Archivo Black";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
   src: url("/fonts/archivo-black-latin.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
-    U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range: U+0020-007E, U+00B7, U+2013-2014, U+2018-2019, U+201C-201D,
+    U+2026;
 }
 @font-face {
   font-family: "Special Elite";
@@ -18,9 +19,8 @@
   font-weight: 400;
   font-display: swap;
   src: url("/fonts/special-elite-latin.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
-    U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range: U+0020-007E, U+00B7, U+2013-2014, U+2018-2019, U+201C-201D,
+    U+2026;
 }
 /* Caveat is a variable font: Google serves one latin file for both 500 & 700. */
 @font-face {
@@ -29,7 +29,6 @@
   font-weight: 400 700;
   font-display: swap;
   src: url("/fonts/caveat-latin.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
-    U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range: U+0020-007E, U+00B7, U+2013-2014, U+2018-2019, U+201C-201D,
+    U+2026;
 }
