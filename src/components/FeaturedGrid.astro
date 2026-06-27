@@ -1,0 +1,32 @@
+---
+import type { ImageMetadata } from "astro";
+import { specimens } from "../data/specimens";
+import SpecimenCard from "./SpecimenCard.astro";
+
+const photos = import.meta.glob<{ default: ImageMetadata }>("../photos/featured/*.{jpg,jpeg}", { eager: true });
+const bySlug = new Map(
+  Object.entries(photos).map(([path, mod]) => [path.split("/").pop()!.replace(/\.jpe?g$/i, ""), mod.default]),
+);
+---
+<section class="featured u-grain" aria-label="Featured specimens">
+  <div class="head">
+    <h2>The collection</h2>
+    <span class="warn">⚠ do not wake</span>
+  </div>
+  <p class="hint">hover to check they're still breathing.</p>
+  <div class="grid">
+    {specimens.map((s) => {
+      const photo = bySlug.get(s.slug);
+      return photo ? <SpecimenCard specimen={s} photo={photo} /> : null;
+    })}
+  </div>
+</section>
+
+<style>
+  .featured { position: relative; background: var(--color-card); padding: 3.1rem 2.75rem 3.6rem; margin-top: 4.25rem; box-shadow: 0 26px 60px -20px rgba(0,0,0,.6); transform: rotate(-0.3deg); }
+  .head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  h2 { font-family: var(--font-display); font-size: clamp(26px, 5vw, 40px); text-transform: uppercase; letter-spacing: -.5px; line-height: .95; margin: 0; }
+  .warn { font-family: var(--font-hand); font-weight: 700; font-size: 24px; color: var(--color-accent); transform: rotate(-2deg); }
+  .hint { font-size: 13px; opacity: .65; margin: 8px 0 0; }
+  .grid { margin-top: 34px; display: grid; grid-template-columns: repeat(auto-fill, minmax(228px, 1fr)); gap: 30px 26px; }
+</style>
