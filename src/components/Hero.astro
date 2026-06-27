@@ -1,0 +1,57 @@
+---
+import { Picture } from "astro:assets";
+import gary from "../photos/featured/gary.jpg";
+---
+<section class="hero u-grain" aria-labelledby="hero-title">
+  <div class="tape tape-l"></div>
+  <div class="tape tape-r"></div>
+  <div class="byline">
+    <span>Est. whenever &nbsp;·&nbsp; Issue ∞</span>
+    <span class="stamp">
+      <span class="deceased">DECEASED</span>
+      <span class="sleeping">just sleeping :)</span>
+    </span>
+  </div>
+  <h1 id="hero-title">They're<br />just<br />sleeping</h1>
+  <p class="intro">A zine of small animals having a really, <em>really</em> long lie-down. We photograph them. We do not wake them. That would be rude.</p>
+  <div class="gary-row">
+    <figure class="gary" id="poke">
+      <div class="frame">
+        <Picture src={gary} formats={["avif", "webp"]} widths={[300, 600]} sizes="300px" alt="a crab, resting" />
+      </div>
+      <figcaption>this is Gary. he's fine.<br /><span>resting his eyes. and his everything.</span></figcaption>
+      <span class="z z1">z</span><span class="z z2">Z</span><span class="z z3">z</span>
+    </figure>
+    <div class="poke-col">
+      <div class="poke-arrow">↙ poke him</div>
+      <p id="poke-line" class="poke-line">psst — go on, poke him. he won't mind.</p>
+      <p class="poke-tally">pokes logged: <span id="poke-count">0</span></p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero { position: relative; background: var(--color-card); padding: 3.4rem 3rem 4rem; box-shadow: 0 26px 60px -20px rgba(0,0,0,.65), 0 2px 0 rgba(0,0,0,.2); transform: rotate(-0.5deg); }
+  .tape { position: absolute; height: 30px; background: var(--tape); mix-blend-mode: multiply; box-shadow: 0 1px 6px rgba(0,0,0,.18); }
+  .tape-l { top: -15px; left: 46px; width: 128px; transform: rotate(-4deg); }
+  .tape-r { top: -13px; right: 60px; width: 108px; transform: rotate(3deg); }
+  .byline { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; opacity: .7; }
+  .stamp { position: relative; transform: rotate(-7deg); }
+  .deceased { border: 2.5px solid var(--color-accent); color: var(--color-accent); font-family: var(--font-display); font-size: 13px; letter-spacing: 2px; padding: 5px 12px; border-radius: 3px; text-decoration: line-through 2px; opacity: .85; animation: tjsFlicker 4s ease-in-out infinite; }
+  .sleeping { position: absolute; left: 8px; top: 24px; font-family: var(--font-hand); font-weight: 700; font-size: 26px; color: var(--color-accent); transform: rotate(-3deg); }
+  h1 { font-family: var(--font-display); font-weight: 400; line-height: .9; letter-spacing: -1px; margin: 30px 0 0; font-size: clamp(46px, 11vw, 104px); text-transform: uppercase; color: var(--color-ink); text-shadow: 2px 2px 0 rgba(0,0,0,.08); }
+  .intro { font-size: 16px; line-height: 1.55; max-width: 430px; margin: 26px 0 0; opacity: .85; }
+  .intro em { font-style: normal; border-bottom: 2px solid var(--color-accent); }
+  .gary-row { display: flex; gap: 30px; align-items: flex-end; flex-wrap: wrap; margin-top: 38px; }
+  .gary { position: relative; width: 300px; max-width: 78vw; margin: 0; cursor: pointer; user-select: none; background: var(--color-card-inner); padding: 12px 12px 14px; box-shadow: 0 10px 26px -12px rgba(0,0,0,.5); transform: rotate(1.4deg); animation: tjsBreathe 5.5s ease-in-out infinite; }
+  .gary:hover { animation: tjsWob .5s ease-in-out; }
+  .frame img { width: 100%; height: auto; filter: grayscale(1) contrast(1.5) brightness(1.07); }
+  figcaption { font-family: var(--font-hand); font-weight: 700; font-size: 23px; line-height: 1.05; margin-top: 8px; }
+  figcaption span { font-size: 18px; font-weight: 500; opacity: .8; }
+  .z { position: absolute; top: -8px; font-family: var(--font-display); color: var(--color-ink); opacity: 0; animation: tjsDrift 4.2s ease-in infinite; }
+  .z1 { right: 18px; font-size: 20px; } .z2 { right: 6px; font-size: 26px; animation-delay: 1.4s; } .z3 { right: 30px; font-size: 16px; animation-delay: 2.8s; }
+  .poke-col { flex: 1 1 220px; min-width: 200px; }
+  .poke-arrow { font-family: var(--font-hand); font-weight: 700; font-size: 24px; color: var(--color-accent); transform: rotate(-1.5deg); }
+  .poke-line { font-size: 14px; line-height: 1.5; margin-top: 10px; min-height: 48px; opacity: .85; }
+  .poke-tally { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; opacity: .5; margin-top: 14px; }
+</style>
