@@ -10,7 +10,7 @@ const { specimen, photo } = Astro.props;
   <div class="tape"></div>
   <div class="bubble">{specimen.wake}<span class="tail"></span></div>
   <div class="frame">
-    <Picture src={photo} formats={["avif", "webp"]} widths={[228, 456]} sizes="228px" alt={specimen.name} />
+    <Picture src={photo} formats={["avif", "webp"]} quality={40} widths={[228, 456]} sizes="228px" loading="lazy" alt={specimen.name} />
   </div>
   <div class="meta"><span class="name">{specimen.name}</span><span class="issue">{specimen.issue}</span></div>
   <p class="sub">{specimen.sub}</p>

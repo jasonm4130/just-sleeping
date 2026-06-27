@@ -17,7 +17,7 @@ import gary from "../photos/featured/gary.jpg";
   <div class="gary-row">
     <figure class="gary" id="poke">
       <div class="frame">
-        <Picture src={gary} formats={["avif", "webp"]} widths={[300, 600]} sizes="300px" alt="a crab, resting" />
+        <Picture src={gary} formats={["avif", "webp"]} quality={55} widths={[300, 600]} sizes="300px" loading="eager" fetchpriority="high" alt="a crab, resting" />
       </div>
       <figcaption>this is Gary. he's fine.<br /><span>resting his eyes. and his everything.</span></figcaption>
       <span class="z z1">z</span><span class="z z2">Z</span><span class="z z3">z</span>

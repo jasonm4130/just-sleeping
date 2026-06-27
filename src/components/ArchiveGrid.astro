@@ -22,7 +22,7 @@ const photos = Object.keys(modules)
   <div class="grid">
     {photos.map(({ img, no, cap }) => (
       <figure class="cell" title={cap ? `${cap.name} the ${cap.species}: “${cap.wakeLine}”` : undefined}>
-        <Image src={img} widths={[200, 400]} sizes="(max-width: 600px) 45vw, 200px" alt={cap ? `${cap.name}, a ${cap.species}, resting` : `Specimen No. ${no}`} loading="lazy" />
+        <Image src={img} widths={[200, 400]} quality={40} sizes="(max-width: 600px) 45vw, 200px" alt={cap ? `${cap.name}, a ${cap.species}, resting` : `Specimen No. ${no}`} loading="lazy" />
         <figcaption class="meta"><span class="nm">{cap?.name ?? "—"}</span><span class="no">No. {no}</span></figcaption>
         {cap && <p class="cap">{cap.caption}</p>}
       </figure>
