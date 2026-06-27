@@ -42,7 +42,7 @@ Do **not** run local deploys. Just commit and push. The `pnpm deploy` script
 
 Targets Lighthouse **100** on Performance / Accessibility / Best-Practices / SEO, mobile + desktop. Keep:
 
-- **Fonts self-hosted** — `public/fonts/*.woff2` (latin subset), `@font-face` in `fonts.css`. No Google Fonts `<link>` (it was render-blocking, ~1.75s on mobile). The two LCP-critical fonts are `<link rel="preload">`ed in `Layout.astro`. To change a font: re-download its woff2 (method noted at the top of `fonts.css`) and update the preloads.
+- **Fonts self-hosted & glyph-subset** — `public/fonts/*.woff2`, `@font-face` in `fonts.css`, subset to the glyphs the site actually renders (ASCII + `· — ' ' " " …`). No Google Fonts `<link>` (it was render-blocking, ~1.75s on mobile). The two LCP-critical fonts are `<link rel="preload">`ed in `Layout.astro`. **Gotcha: if you add copy with new glyphs (accents, new symbols), re-subset the woff2** (`pyftsubset --unicodes=…`, see the `fonts.css` header) and widen its `unicode-range` to match — otherwise the new glyph silently falls back to a system font.
 - **Every photo renders grayscale** (`filter: grayscale(1) contrast(...)`), so image `quality` is deliberately low (40–55) — fewer bytes, zero visible change. Keep it low.
 - **Hero `gary` is the LCP image** → `loading="eager" fetchpriority="high"`. Every other image is `loading="lazy"`.
 - **CSS is inlined** (`build.inlineStylesheets: "always"` in `astro.config.mjs`) — no render-blocking stylesheet request.
